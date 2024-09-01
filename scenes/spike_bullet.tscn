@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://bt1nsawbcpxct"]
+
+[ext_resource type="Script" path="res://scripts/spike_bullet.gd" id="1_v68ya"]
+[ext_resource type="Texture2D" uid="uid://bgv55ofuh5bvl" path="res://sprites/pvv_peablasting.png" id="2_rsos5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kfnd0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pkx7g"]
+radius = 1000.0
+
+[node name="spike_bullet" type="Node2D"]
+script = ExtResource("1_v68ya")
+
+[node name="pvv_peablasting" type="Sprite2D" parent="."]
+modulate = Color(1, 0.236504, 0.254572, 1)
+texture = ExtResource("2_rsos5")
+hframes = 5
+vframes = 2
+frame = 8
+
+[node name="bullet_area3" type="Area2D" parent="."]
+z_index = -1
+
+[node name="bullet_collision" type="CollisionShape2D" parent="bullet_area3"]
+shape = SubResource("CircleShape2D_kfnd0")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="detection_area" type="Area2D" parent="."]
+z_index = -21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_pkx7g")
+
+[connection signal="area_entered" from="bullet_area3" to="." method="_on_bullet_area_3_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,659 @@
+[gd_scene load_steps=18 format=3 uid="uid://dwc4qx4lfdgjv"]
+
+[ext_resource type="Script" path="res://scripts/lawn.gd" id="1_g72vm"]
+[ext_resource type="Script" path="res://scripts/paused.gd" id="2_egcmh"]
+[ext_resource type="Texture2D" uid="uid://f5uxf7haeika" path="res://sprites/pvv_sunpea.png" id="3_yjeqd"]
+[ext_resource type="Texture2D" uid="uid://2novrdyskt0u" path="res://sprites/pvv_vine.png" id="4_ofah3"]
+[ext_resource type="Texture2D" uid="uid://cg1c8sq5s4mng" path="res://sprites/pvv_sunleaf.png" id="4_ql41n"]
+[ext_resource type="Texture2D" uid="uid://hhljxsuua52e" path="res://sprites/pvv_fly.png" id="5_pwjgy"]
+[ext_resource type="PackedScene" uid="uid://bv6kjkbxxvryr" path="res://scenes/cooldown_bar.tscn" id="5_xht25"]
+[ext_resource type="Texture2D" uid="uid://dy02nelf7w0h4" path="res://sprites/square.png" id="7_3gk1p"]
+[ext_resource type="Texture2D" uid="uid://ouam6ijtsl5h" path="res://sprites/pvv_tiles2.png" id="7_6uhf7"]
+[ext_resource type="Texture2D" uid="uid://d11m7u11hu3wu" path="res://sprites/pvv_tiles.png" id="10_hqyov"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eymok"]
+load_path = "res://.godot/imported/pvv_tiles.png-4db2e4440509f4c95e36c6887defee69.ctex"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_45po4"]
+texture = SubResource("CompressedTexture2D_eymok")
+texture_region_size = Vector2i(32, 32)
+3:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_xw7xv"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_45po4")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bg8c"]
+texture = SubResource("CompressedTexture2D_eymok")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_evor5"]
+texture = ExtResource("7_6uhf7")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:1/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8dl8b"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_6bg8c")
+sources/1 = SubResource("TileSetAtlasSource_evor5")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pil5"]
+size = Vector2(32, 160)
+
+[node name="lawn" type="Node2D"]
+process_mode = 1
+script = ExtResource("1_g72vm")
+
+[node name="pausetext" type="Node2D" parent="."]
+process_mode = 3
+visible = false
+z_index = 1201
+position = Vector2(218, 125)
+scale = Vector2(0.8, 0.8)
+
+[node name="Label" type="Label" parent="pausetext"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="score" type="Label" parent="pausetext"]
+offset_left = -91.25
+offset_top = 35.0
+offset_right = 146.75
+offset_bottom = 58.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Current Score: "
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="pausetext"]
+offset_left = -151.25
+offset_top = 57.5
+offset_right = 207.75
+offset_bottom = 106.5
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 7
+text = "Score is the danger level! the higher the more enemy spawn rate!"
+horizontal_alignment = 1
+
+[node name="restart" type="Sprite2D" parent="pausetext"]
+modulate = Color(0.981127, 0.339741, 0.391828, 1)
+position = Vector2(26, -32)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_pwjgy")
+hframes = 6
+frame = 5
+
+[node name="Button_restart" type="Button" parent="pausetext/restart"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 15.0
+offset_bottom = 13.0
+
+[node name="non_pause" type="Node2D" parent="."]
+process_mode = 3
+position = Vector2(423, 12)
+script = ExtResource("2_egcmh")
+
+[node name="Button_pause" type="Button" parent="non_pause"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 3.0
+offset_right = 44.0
+offset_bottom = 25.0
+focus_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="pausetile" type="Sprite2D" parent="non_pause"]
+modulate = Color(0.436107, 0.745631, 0.920544, 1)
+z_index = 1201
+position = Vector2(20.7, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 15
+
+[node name="darkscreen" type="Sprite2D" parent="non_pause"]
+visible = false
+modulate = Color(0, 0, 0, 0.313726)
+z_index = 1200
+position = Vector2(-180, 125)
+scale = Vector2(68.2302, 38.8734)
+texture = ExtResource("7_3gk1p")
+hframes = 4
+vframes = 4
+frame = 15
+
+[node name="dead" type="Node2D" parent="."]
+process_mode = 3
+visible = false
+
+[node name="dead_screen" type="Sprite2D" parent="dead"]
+modulate = Color(0, 0, 0, 0.313726)
+z_index = 1200
+position = Vector2(239, 136)
+scale = Vector2(68.2302, 38.8734)
+texture = ExtResource("7_3gk1p")
+hframes = 4
+vframes = 4
+frame = 15
+
+[node name="Node2D" type="Node2D" parent="dead"]
+z_index = 1220
+
+[node name="Label" type="Label" parent="dead/Node2D"]
+offset_left = 53.0
+offset_top = 95.0
+offset_right = 412.0
+offset_bottom = 144.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 15
+text = "You're dead!
+Play again by clicking the replay button below!"
+horizontal_alignment = 1
+
+[node name="restart" type="Sprite2D" parent="dead"]
+modulate = Color(0.981127, 0.339741, 0.391828, 1)
+z_index = 1230
+position = Vector2(240, 165)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("5_pwjgy")
+hframes = 6
+frame = 5
+
+[node name="Button_restart" type="Button" parent="dead/restart"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -13.0
+offset_top = -13.0
+offset_right = 15.0
+offset_bottom = 13.0
+
+[node name="seed_slots" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_xw7xv")
+format = 2
+layer_0/name = "seed_slots -5"
+layer_0/z_index = -5
+layer_0/tile_data = PackedInt32Array(2, 0, 6, 3, 0, 5, 4, 0, 6, 5, 0, 6, 6, 0, 5, 65542, 196608, 4, 65541, 65536, 5, 65540, 196608, 5, 65538, 65536, 5, 65539, 65536, 5, -65534, 196608, 536870916, -65533, 196608, 536870916, -65532, 65536, 536870917, -65531, 196608, 536870917, -65530, 196608, 536870917, 65543, 65536, 5, -65529, 65536, 536870917, 7, 0, 5, 8, 65536, 6, 65544, 196608, 1610612742, -65528, 196608, 805306374, 1, 65536, 7, 65537, 196608, 5, -65535, 65536, 536870917, 0, 0, 7, 65536, 196608, 4, -65536, 196608, 536870917, 65535, 196608, 1879048197, 131071, 196608, 6, -1, 196608, 1342177286)
+
+[node name="sun_cost_seed1" type="Node2D" parent="seed_slots"]
+position = Vector2(74, 28)
+scale = Vector2(0.3, 0.3)
+
+[node name="Label" type="Label" parent="seed_slots/sun_cost_seed1"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "125"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="sun_cost_seed2" type="Node2D" parent="seed_slots"]
+position = Vector2(106, 28)
+scale = Vector2(0.3, 0.3)
+
+[node name="Label" type="Label" parent="seed_slots/sun_cost_seed2"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "75"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="sun_cost_seed3" type="Node2D" parent="seed_slots"]
+position = Vector2(138, 28)
+scale = Vector2(0.3, 0.3)
+
+[node name="Label" type="Label" parent="seed_slots/sun_cost_seed3"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "100"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="shooter_seed1" type="Sprite2D" parent="seed_slots"]
+y_sort_enabled = true
+position = Vector2(80, 16)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_yjeqd")
+hframes = 21
+vframes = 2
+frame = 8
+
+[node name="bloom_seed2" type="Sprite2D" parent="seed_slots"]
+y_sort_enabled = true
+position = Vector2(112, 16)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("3_yjeqd")
+hframes = 21
+vframes = 2
+frame = 29
+
+[node name="vine_seed3" type="Sprite2D" parent="seed_slots"]
+y_sort_enabled = true
+position = Vector2(144, 16)
+texture = ExtResource("4_ofah3")
+hframes = 5
+frame = 1
+
+[node name="sun" type="Sprite2D" parent="seed_slots"]
+position = Vector2(16, 16)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_ql41n")
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="sun_panel" type="Sprite2D" parent="seed_slots"]
+modulate = Color(1, 1, 1, 0.392157)
+z_index = -10
+position = Vector2(32, 16)
+scale = Vector2(2, 1)
+texture = ExtResource("7_3gk1p")
+
+[node name="cooldown_bar_seed1" parent="seed_slots" instance=ExtResource("5_xht25")]
+z_index = -10
+position = Vector2(67.1, 3.1)
+scale = Vector2(0.81, 0.81)
+
+[node name="cooldown_bar_seed2" parent="seed_slots" instance=ExtResource("5_xht25")]
+z_index = -10
+position = Vector2(99.1, 3.1)
+scale = Vector2(0.81, 0.81)
+
+[node name="cooldown_bar_seed3" parent="seed_slots" instance=ExtResource("5_xht25")]
+z_index = -10
+position = Vector2(131.1, 3.1)
+scale = Vector2(0.81, 0.81)
+
+[node name="cooldown_bar_seed4" parent="seed_slots" instance=ExtResource("5_xht25")]
+z_index = -10
+position = Vector2(163.1, 3.1)
+scale = Vector2(0.81, 0.81)
+
+[node name="cooldown_bar_seed5" parent="seed_slots" instance=ExtResource("5_xht25")]
+z_index = -10
+position = Vector2(195.1, 3.1)
+scale = Vector2(0.81, 0.81)
+
+[node name="cooldown_bar_seed6" parent="seed_slots" instance=ExtResource("5_xht25")]
+z_index = -10
+position = Vector2(227.1, 3.1)
+scale = Vector2(0.81, 0.81)
+
+[node name="graft_slots" type="TileMap" parent="."]
+position = Vector2(2.08165e-12, 14)
+tile_set = SubResource("TileSet_xw7xv")
+format = 2
+layer_0/name = "graft_slots -5"
+layer_0/z_index = -5
+layer_0/tile_data = PackedInt32Array(458754, 131072, 5, 458755, 0, 6, 458756, 131072, 5, 458757, 0, 6, 458758, 0, 5, 458759, 0, 5, 524290, 65536, 5, 524291, 65536, 5, 524292, 196608, 5, 524293, 65536, 5, 524294, 196608, 5, 524295, 196608, 4, 393218, 196608, 536870916, 393219, 65536, 536870917, 393220, 65536, 536870917, 393221, 65536, 536870917, 393222, 65536, 536870917, 393223, 196608, 536870916, 524289, 196608, 5, 393217, 196608, 536870916, 393224, 196608, 805306374, 524296, 196608, 1610612742, 458760, 65536, 6, 458753, 65536, 7, 458752, 0, 7, 524288, 65536, 5, 393216, 65536, 536870917, 524287, 65536, 268435462, 589823, 196608, 6, 458751, 196608, 1342177286)
+
+[node name="leaf" type="Sprite2D" parent="graft_slots"]
+position = Vector2(16, 240)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_ql41n")
+hframes = 2
+vframes = 2
+frame = 3
+
+[node name="leaf_panel" type="Sprite2D" parent="graft_slots"]
+modulate = Color(1, 1, 1, 0.392157)
+z_index = -10
+position = Vector2(128, 240)
+scale = Vector2(8, 1)
+texture = ExtResource("7_3gk1p")
+
+[node name="ground_tiles" type="TileMap" parent="."]
+z_index = -10
+position = Vector2(2.08165e-12, -8)
+tile_set = SubResource("TileSet_8dl8b")
+format = 2
+layer_0/name = "dirt -5"
+layer_0/z_index = -5
+layer_0/tile_data = PackedInt32Array(196609, 0, 1, 327681, 0, 1, 327693, 0, 1, 196621, 0, 2, 131084, 131072, 1, 131082, 131072, 1, 131080, 0, 2, 131078, 131072, 1, 131076, 0, 1, 131074, 131072, 1, 262146, 0, 1, 196611, 0, 2, 327683, 131072, 1, 393218, 0, 2, 393220, 131072, 1, 262148, 131072, 1, 196613, 131072, 1, 327685, 131072, 1, 393222, 0, 2, 327687, 0, 2, 196615, 0, 1, 262150, 131072, 1, 262152, 131072, 1, 196617, 0, 1, 327689, 0, 1, 393224, 0, 1, 393226, 0, 1, 262154, 131072, 1, 196619, 0, 1, 262156, 131072, 1, 327691, 0, 2, 393228, 0, 2, 393217, 65536, 1, 327682, 65536, 2, 262145, 196608, 1, 196610, 196608, 1, 131073, 196608, 1, 131075, 65536, 1, 262147, 196608, 1, 196612, 65536, 1, 393219, 65536, 2, 393221, 196608, 1, 327684, 65536, 2, 262149, 196608, 1, 131077, 196608, 1, 196614, 65536, 2, 131079, 196608, 1, 196616, 65536, 2, 262151, 65536, 1, 327686, 196608, 1, 393223, 196608, 1, 393225, 196608, 1, 393227, 65536, 2, 327692, 196608, 1, 393229, 65536, 1, 262157, 65536, 2, 196620, 196608, 1, 131085, 65536, 1, 131083, 196608, 1, 131081, 65536, 2, 196618, 65536, 2, 262153, 65536, 2, 327690, 65536, 1, 262155, 196608, 1, 327688, 65536, 1, 65536, 1, 0, 65537, 131073, 0, 65538, 131073, 0, 65539, 196609, 0, 65540, 196609, 0, 65541, 196609, 0, 65542, 1, 0, 65543, 196609, 0, 65544, 1, 0, 65545, 1, 0, 65546, 65537, 0, 65547, 131073, 0, 65548, 1, 0, 65549, 65537, 0, 131072, 196609, 2, 393216, 196609, 2, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 196609, 0, 458756, 196609, 0, 458757, 65537, 0, 458758, 131073, 0, 458759, 65537, 0, 458760, 1, 0, 458761, 65537, 0, 458762, 131073, 0, 458763, 131073, 0, 458764, 1, 0, 458765, 65537, 0, 65550, 1, 2, 131086, 196609, 2, 196622, 65537, 2, 262158, 131073, 2, 327694, 65537, 2, 393230, 131073, 2, 458766, 65537, 2, 196608, 1, 2, 327680, 65537, 2, 262144, 131073, 2, 524288, 1, 3, 524289, 1, 3, 524290, 1, 3, 524291, 65537, 3, 524292, 1, 3, 524293, 1, 3, 524294, 65537, 3, 524295, 65537, 3, 524296, 1, 3, 524297, 65537, 3, 524298, 1, 3, 524299, 65537, 3, 524300, 65537, 3, 524301, 65537, 3, 524302, 196609, 2, 14, 131073, 2, 13, 65537, 3, 12, 1, 3, 11, 1, 3, 10, 65537, 3, 9, 65537, 3, 8, 65537, 3, 0, 1, 3, 1, 1, 3, 2, 1, 3, 3, 1, 3, 4, 65537, 3, 5, 1, 3, 6, 65537, 3, 7, 65537, 3)
+layer_1/name = "grass -4"
+layer_1/z_index = -4
+layer_1/tile_data = PackedInt32Array(65550, 65536, 0, 458766, 65536, 0, 65537, 131073, 268435457, 458757, 131073, 268435457, 458764, 65537, 1, 65541, 1, 1, 458761, 131073, 1, 524301, 0, 1342177280, 524300, 65536, 1342177280, 524299, 0, 1342177280, 524298, 65536, 1342177280, 524297, 0, 1342177280, 524296, 65536, 1342177280, 524295, 65536, 1342177280, 524294, 0, 1342177280, 524293, 65536, 1342177280, 524292, 0, 1342177280, 524291, 0, 1342177280, 524290, 65536, 1342177280, 524289, 65536, 1342177280, 524288, 0, 1342177280, 0, 65536, 1879048192, 1, 65536, 1879048192, 2, 65536, 1879048192, 3, 65536, 1879048192, 4, 65536, 1879048192, 5, 65536, 1879048192, 6, 65536, 1879048192, 7, 0, 1879048192, 8, 65536, 1879048192, 9, 0, 1879048192, 10, 65536, 1879048192, 11, 65536, 1879048192, 12, 0, 1879048192, 13, 0, 1879048192, 524302, 131072, 0, 14, 131072, 536870912, 65549, 65537, 1, 65548, 131073, 1, 131073, 65536, 0, 196609, 65536, 0, 262145, 0, 0, 327681, 0, 0, 393217, 65536, 0, 393216, 0, 268435456, 327680, 0, 268435456, 262144, 0, 268435456, 196608, 0, 268435456, 131072, 0, 268435456)
+layer_2/name = "grass -3"
+layer_2/z_index = -3
+layer_2/tile_data = PackedInt32Array(131073, 65536, 1342177280, 131074, 65536, 1342177280, 131075, 65536, 1342177280, 131076, 65536, 1342177280, 131077, 0, 1342177280, 131078, 0, 1342177280, 131079, 65536, 1342177280, 131080, 0, 1342177280, 131081, 65536, 1342177280, 131082, 65536, 1342177280, 131083, 0, 1342177280, 131084, 65536, 1342177280, 131085, 65536, 1342177280, 393217, 0, 1610612736, 393218, 65536, 1610612736, 393219, 65536, 1610612736, 393220, 65536, 1610612736, 393221, 65536, 1610612736, 393222, 65536, 1610612736, 393223, 65536, 1610612736, 393224, 65536, 1610612736, 393225, 0, 1610612736, 393226, 0, 1610612736, 393227, 0, 1610612736, 393228, 65536, 1610612736, 393229, 0, 1610612736, 65547, 1, 1, 65537, 65537, 1, 65541, 196609, 1, 65543, 131073, 1, 458762, 196609, 1, 458759, 65537, 1, 458757, 1, 1, 65549, 1, 1, 65544, 65537, 268435457, 393216, 0, 1610612736, 131072, 65536, 1342177280, 458752, 65537, 268435457, 458761, 1, 1, 327680, 65536, 1073741824, 196608, 65536, 1073741824, 262144, 0, 1073741824)
+layer_3/name = "grass -2"
+layer_3/z_index = -2
+layer_3/tile_data = PackedInt32Array(327680, 0, 536870912, 262144, 65536, 536870912, 196608, 0, 536870912, 131072, 65536, 536870912, 393216, 65536, 536870912)
+layer_4/name = "grass -1"
+layer_4/z_index = 1
+layer_4/tile_data = PackedInt32Array(393216, 65536, 1342177280, 327680, 0, 1610612736, 262144, 0, 1879048192, 196608, 65536, 1610612736, 131072, 65536, 1610612736)
+
+[node name="hi_light" type="Sprite2D" parent="."]
+process_mode = 1
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(-100, 86)
+texture = SubResource("CompressedTexture2D_eymok")
+hframes = 4
+vframes = 8
+frame = 14
+
+[node name="slot_light" type="Sprite2D" parent="."]
+process_mode = 1
+modulate = Color(1, 1, 1, 0.196078)
+position = Vector2(-100, 125)
+texture = SubResource("CompressedTexture2D_eymok")
+hframes = 4
+vframes = 8
+frame = 14
+
+[node name="shovel" type="Sprite2D" parent="."]
+process_mode = 1
+z_index = 1
+y_sort_enabled = true
+position = Vector2(348.29, 21)
+texture = SubResource("CompressedTexture2D_eymok")
+hframes = 4
+vframes = 8
+frame = 15
+
+[node name="shovel_shadow" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(348.29, 21)
+texture = SubResource("CompressedTexture2D_eymok")
+hframes = 4
+vframes = 8
+frame = 16
+
+[node name="watering_can" type="Sprite2D" parent="."]
+process_mode = 1
+z_index = 1
+y_sort_enabled = true
+position = Vector2(298, 22)
+texture = SubResource("CompressedTexture2D_eymok")
+hframes = 4
+vframes = 8
+frame = 17
+
+[node name="watering_can_shadow" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(298, 22)
+texture = SubResource("CompressedTexture2D_eymok")
+hframes = 4
+vframes = 8
+frame = 18
+
+[node name="compose" type="Sprite2D" parent="."]
+process_mode = 1
+z_index = 1
+y_sort_enabled = true
+position = Vector2(396, 24)
+texture = ExtResource("10_hqyov")
+hframes = 4
+vframes = 8
+frame = 30
+
+[node name="compose_shadow" type="Sprite2D" parent="."]
+process_mode = 1
+position = Vector2(396, 24)
+texture = ExtResource("10_hqyov")
+hframes = 4
+vframes = 8
+frame = 31
+
+[node name="sun_value" type="Node2D" parent="."]
+position = Vector2(28, 7)
+scale = Vector2(0.8, 0.8)
+
+[node name="Label" type="Label" parent="sun_value"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+horizontal_alignment = 1
+
+[node name="leaf_value" type="Node2D" parent="."]
+position = Vector2(26, 245)
+scale = Vector2(0.8, 0.8)
+
+[node name="Label" type="Label" parent="leaf_value"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="sun_timer" type="Timer" parent="."]
+
+[node name="speedx1" type="Node2D" parent="."]
+position = Vector2(279, 236)
+
+[node name="Label" type="Label" parent="speedx1"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "x1"
+horizontal_alignment = 1
+
+[node name="Button_speed1" type="Button" parent="speedx1"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 3.0
+offset_right = 35.0
+offset_bottom = 25.0
+focus_mode = 0
+toggle_mode = true
+
+[node name="speedtile" type="Sprite2D" parent="speedx1"]
+modulate = Color(0.443137, 0.8, 0.443137, 1)
+z_index = -1
+position = Vector2(22.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedx2" type="Node2D" parent="."]
+position = Vector2(324, 236)
+
+[node name="Label" type="Label" parent="speedx2"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "x2"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button_speed2" type="Button" parent="speedx2"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 3.0
+offset_right = 35.0
+offset_bottom = 25.0
+focus_mode = 0
+toggle_mode = true
+
+[node name="speedtile" type="Sprite2D" parent="speedx2"]
+modulate = Color(0.960784, 0.921569, 0.435294, 1)
+z_index = -2
+position = Vector2(18.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedtile2" type="Sprite2D" parent="speedx2"]
+modulate = Color(0.960784, 0.921569, 0.435294, 1)
+z_index = -1
+position = Vector2(26.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedx3" type="Node2D" parent="."]
+position = Vector2(372, 236)
+
+[node name="Label" type="Label" parent="speedx3"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "x3"
+horizontal_alignment = 1
+
+[node name="Button_speed3" type="Button" parent="speedx3"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 3.0
+offset_right = 35.0
+offset_bottom = 25.0
+focus_mode = 0
+toggle_mode = true
+
+[node name="speedtile1" type="Sprite2D" parent="speedx3"]
+modulate = Color(0.992157, 0.623529, 0.333333, 1)
+z_index = -3
+position = Vector2(16.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedtile2" type="Sprite2D" parent="speedx3"]
+modulate = Color(0.992157, 0.623529, 0.333333, 1)
+z_index = -2
+position = Vector2(22.7, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedtile3" type="Sprite2D" parent="speedx3"]
+modulate = Color(0.992157, 0.623529, 0.333333, 1)
+z_index = -1
+position = Vector2(29.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedx4" type="Node2D" parent="."]
+position = Vector2(423, 236)
+
+[node name="Label" type="Label" parent="speedx4"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "x4"
+horizontal_alignment = 1
+
+[node name="Button_speed4" type="Button" parent="speedx4"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 3.0
+offset_right = 44.0
+offset_bottom = 25.0
+focus_mode = 0
+
+[node name="speedtile1" type="Sprite2D" parent="speedx4"]
+modulate = Color(0.992157, 0.407843, 0.403922, 1)
+z_index = -3
+position = Vector2(14.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedtile2" type="Sprite2D" parent="speedx4"]
+modulate = Color(0.992157, 0.407843, 0.403922, 1)
+z_index = -2
+position = Vector2(20.7, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedtile3" type="Sprite2D" parent="speedx4"]
+modulate = Color(0.992157, 0.407843, 0.403922, 1)
+z_index = -1
+position = Vector2(27.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="speedtile4" type="Sprite2D" parent="speedx4"]
+modulate = Color(0.992157, 0.407843, 0.403922, 1)
+z_index = -1
+position = Vector2(34.2, 13.3)
+scale = Vector2(0.757812, 0.75)
+texture = ExtResource("7_6uhf7")
+hframes = 4
+vframes = 4
+frame = 14
+
+[node name="dead_area" type="Area2D" parent="."]
+position = Vector2(-16, 135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead_area"]
+shape = SubResource("RectangleShape2D_5pil5")
+
+[connection signal="button_up" from="pausetext/restart/Button_restart" to="." method="_on_button_restart_button_up"]
+[connection signal="button_up" from="non_pause/Button_pause" to="non_pause" method="_on_button_pause_button_up"]
+[connection signal="button_up" from="dead/restart/Button_restart" to="." method="_on_button_restart_button_up"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="sun_timer" to="." method="_on_sun_timer_timeout"]
+[connection signal="button_up" from="speedx1/Button_speed1" to="." method="_on_button_speed_1_button_up"]
+[connection signal="button_up" from="speedx2/Button_speed2" to="." method="_on_button_speed_2_button_up"]
+[connection signal="button_up" from="speedx3/Button_speed3" to="." method="_on_button_speed_3_button_up"]
+[connection signal="button_up" from="speedx4/Button_speed4" to="." method="_on_button_speed_4_button_up"]
+[connection signal="area_entered" from="dead_area" to="." method="_on_dead_area_area_entered"]

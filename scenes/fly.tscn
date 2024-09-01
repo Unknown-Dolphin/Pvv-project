@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://cvjfolg7t36y3"]
+
+[ext_resource type="Script" path="res://scripts/fly.gd" id="1_hpwvb"]
+[ext_resource type="Texture2D" uid="uid://hhljxsuua52e" path="res://sprites/pvv_fly.png" id="3_tpvg7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x2qu"]
+atlas = ExtResource("3_tpvg7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhfx2"]
+atlas = ExtResource("3_tpvg7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8toi"]
+atlas = ExtResource("3_tpvg7")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hylnm"]
+atlas = ExtResource("3_tpvg7")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avftm"]
+atlas = ExtResource("3_tpvg7")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ybkj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x2qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vhfx2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8toi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hylnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avftm")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4gqth"]
+radius = 3.0
+height = 28.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6o51u"]
+radius = 3.0
+height = 28.0
+
+[node name="fly" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_hpwvb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
+sprite_frames = SubResource("SpriteFrames_4ybkj")
+animation = &"walk"
+frame_progress = 0.0437447
+
+[node name="enemy_fly" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_fly"]
+shape = SubResource("CapsuleShape2D_4gqth")
+
+[node name="enemy" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+shape = SubResource("CapsuleShape2D_6o51u")
+
+[connection signal="area_entered" from="enemy_fly" to="." method="_on_enemy_fly_area_entered"]
+[connection signal="area_entered" from="enemy" to="." method="_on_enemy_area_entered"]

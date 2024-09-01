@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv6kjkbxxvryr"]
+
+[ext_resource type="Texture2D" uid="uid://dy02nelf7w0h4" path="res://sprites/square.png" id="1_5asq4"]
+
+[node name="cooldown_bar" type="Node2D"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 10000.0
+value = 10000.0
+rounded = true
+fill_mode = 2
+texture_under = ExtResource("1_5asq4")
+texture_progress = ExtResource("1_5asq4")
+tint_under = Color(0, 0, 0, 0.313726)
+tint_over = Color(1, 0.901961, 0.392157, 1)
+tint_progress = Color(1, 1, 1, 0.392157)

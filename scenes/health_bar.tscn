@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvy7lryr5q3ee"]
+
+[ext_resource type="Texture2D" uid="uid://dktcwjegcqwyb" path="res://sprites/white_dot.png" id="1_5qfwp"]
+
+[node name="health_bar" type="Node2D"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 5
+texture_under = ExtResource("1_5qfwp")
+texture_progress = ExtResource("1_5qfwp")
+tint_under = Color(0, 0, 0, 1)

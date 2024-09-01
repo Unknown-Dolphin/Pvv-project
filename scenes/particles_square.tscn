@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://c206qd65ejnl"]
+
+[ext_resource type="Script" path="res://scripts/die_in_one.gd" id="1_bwwa6"]
+
+[sub_resource type="Gradient" id="Gradient_flkdk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="particles_square" type="Node2D"]
+z_index = 10
+script = ExtResource("1_bwwa6")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 4
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 1.0
+direction = Vector2(2.08165e-12, -1)
+spread = 90.0
+gravity = Vector2(2.08165e-12, 10)
+initial_velocity_min = 9.0
+initial_velocity_max = 12.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+linear_accel_min = -1.0
+linear_accel_max = -0.1
+scale_amount_max = 8.0
+color = Color(0.500801, 0.844843, 0.495209, 1)
+color_ramp = SubResource("Gradient_flkdk")
+hue_variation_min = -0.2
+hue_variation_max = 0.4

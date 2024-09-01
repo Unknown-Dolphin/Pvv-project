@@ -1,0 +1,209 @@
+[gd_scene load_steps=27 format=3 uid="uid://bqa12mxh2fftd"]
+
+[ext_resource type="Script" path="res://scripts/sun_bloom.gd" id="1_juajy"]
+[ext_resource type="Texture2D" uid="uid://f5uxf7haeika" path="res://sprites/pvv_sunpea.png" id="2_3pwes"]
+[ext_resource type="PackedScene" uid="uid://kqjgpwrln2xx" path="res://scenes/progress_bar.tscn" id="3_ouusg"]
+[ext_resource type="PackedScene" uid="uid://dvy7lryr5q3ee" path="res://scenes/health_bar.tscn" id="4_hejuf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge4gr"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(256, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_is802"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(288, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg8v0"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(320, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip0pr"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(352, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubfhb"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(384, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps0y4"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(416, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iei6"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(448, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss6c6"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(480, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fn3xg"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(512, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48whu"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(544, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5vjv"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(576, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0ygl"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(608, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dydde"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmbyo"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaa22"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqqym"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86f57"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwqyx"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crbfa"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwjxr"]
+atlas = ExtResource("2_3pwes")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v6ywa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge4gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_is802")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg8v0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip0pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubfhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps0y4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iei6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss6c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fn3xg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48whu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5vjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0ygl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_dydde")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_xmbyo")
+}, {
+"duration": 1.3,
+"texture": SubResource("AtlasTexture_iaa22")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_nqqym")
+}, {
+"duration": 2.1,
+"texture": SubResource("AtlasTexture_86f57")
+}, {
+"duration": 1.5,
+"texture": SubResource("AtlasTexture_iwqyx")
+}, {
+"duration": 0.9,
+"texture": SubResource("AtlasTexture_crbfa")
+}],
+"loop": true,
+"name": &"mini_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwjxr")
+}],
+"loop": true,
+"name": &"seed",
+"speed": 0.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3qlsk"]
+radius = 4.0
+height = 24.0
+
+[node name="sun_bloom" type="Node2D"]
+script = ExtResource("1_juajy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_v6ywa")
+animation = &"seed"
+speed_scale = 0.8
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="sun_timer" type="Timer" parent="."]
+process_callback = 0
+
+[node name="timer_bar" parent="." instance=ExtResource("3_ouusg")]
+modulate = Color(0.509804, 0.823529, 0.509804, 1)
+position = Vector2(-15, 8)
+scale = Vector2(0.2, 0.2)
+
+[node name="health_bar" parent="." instance=ExtResource("4_hejuf")]
+modulate = Color(0.960784, 0.25098, 0.298039, 1)
+position = Vector2(-15, -15)
+scale = Vector2(0.2, 0.2)
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CapsuleShape2D_3qlsk")
+
+[node name="time_up" type="Timer" parent="."]
+
+[node name="time_up_bar" parent="." instance=ExtResource("3_ouusg")]
+position = Vector2(9, -15)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="sun_timer" to="." method="_on_sun_timer_timeout"]
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="timeout" from="time_up" to="." method="_on_time_up_timeout"]

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjryh675cec6l"]
+
+[ext_resource type="Texture2D" uid="uid://f5uxf7haeika" path="res://sprites/pvv_sunpea.png" id="1_7d0yn"]
+
+[node name="nothing" type="Node2D"]
+
+[node name="PvzSunpea" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("1_7d0yn")

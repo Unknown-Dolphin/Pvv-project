@@ -1,0 +1,127 @@
+[gd_scene load_steps=16 format=3 uid="uid://c2g0hw7qcw70y"]
+
+[ext_resource type="Script" path="res://scripts/vine_spike.gd" id="1_t4cqd"]
+[ext_resource type="Texture2D" uid="uid://2novrdyskt0u" path="res://sprites/pvv_vine.png" id="2_38b3h"]
+[ext_resource type="PackedScene" uid="uid://kqjgpwrln2xx" path="res://scenes/progress_bar.tscn" id="3_bhcq7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yml38"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs0op"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfe72"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc7ff"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u72b"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fv6j5"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihaj3"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7peo2"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irote"]
+atlas = ExtResource("2_38b3h")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wed4m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yml38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs0op")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xfe72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc7ff")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u72b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fv6j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihaj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7peo2")
+}],
+"loop": true,
+"name": &"power_up",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irote")
+}],
+"loop": true,
+"name": &"seed",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehcpx"]
+size = Vector2(20, 14)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6fcvy"]
+radius = 4.0
+height = 24.0
+
+[node name="vine_spike" type="Node2D"]
+script = ExtResource("1_t4cqd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wed4m")
+animation = &"idle"
+speed_scale = 0.8
+
+[node name="vine_hit_range" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="vine_hit_range"]
+shape = SubResource("RectangleShape2D_ehcpx")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+light_mask = 512
+visibility_layer = 512
+position = Vector2(0, 10)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6fcvy")
+disabled = true
+
+[node name="time_up" type="Timer" parent="."]
+
+[node name="time_up_bar" parent="." instance=ExtResource("3_bhcq7")]
+z_index = -1
+position = Vector2(9, -15)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="input_event" from="vine_hit_range" to="." method="_on_vine_hit_range_input_event"]
+[connection signal="timeout" from="time_up" to="." method="_on_time_up_timeout"]

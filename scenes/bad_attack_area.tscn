@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqgfl12dybq2"]
+
+[ext_resource type="Script" path="res://scripts/attack_ball.gd" id="1_wjyyg"]
+[ext_resource type="Texture2D" uid="uid://dktcwjegcqwyb" path="res://sprites/white_dot.png" id="2_tihxu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvqe2"]
+radius = 7.0
+
+[node name="attack_area" type="Node2D"]
+script = ExtResource("1_wjyyg")
+
+[node name="attack_area_enemy" type="Area2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area_enemy"]
+shape = SubResource("CircleShape2D_hvqe2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="WhiteDot" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_tihxu")
+
+[connection signal="area_entered" from="attack_area_enemy" to="." method="_on_attack_area_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

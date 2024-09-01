@@ -1,0 +1,110 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6x1crfsipy3r"]
+
+[ext_resource type="Texture2D" uid="uid://im2i14pgeod4" path="res://sprites/pvv_slime.png" id="1_c5a4q"]
+[ext_resource type="Script" path="res://scripts/slime.gd" id="1_oqocq"]
+[ext_resource type="PackedScene" uid="uid://dvy7lryr5q3ee" path="res://scenes/health_bar.tscn" id="3_sr18h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xmly"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byvqp"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eguls"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t81ml"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awalr"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edw7h"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hiix"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwer5"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ei70"]
+atlas = ExtResource("1_c5a4q")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f76ql"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xmly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byvqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eguls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t81ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awalr")
+}],
+"loop": true,
+"name": &"eat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edw7h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hiix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwer5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ei70")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tf21x"]
+radius = 8.0
+height = 24.0
+
+[node name="slime" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_oqocq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f76ql")
+animation = &"walk"
+
+[node name="enemy" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(0, 2)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_tf21x")
+
+[node name="health_bar" parent="." instance=ExtResource("3_sr18h")]
+modulate = Color(0.960784, 0.25098, 0.298039, 1)
+position = Vector2(-15, -15)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="enemy" to="." method="_on_enemy_area_exited"]
